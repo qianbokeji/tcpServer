@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianbo.mapper.InformMsgMapper">
+
+
+    <select id="selectAllByUserIdAndAcceptId" resultType="com.qianbo.msg.domain.InformMsg">
+        select *
+        from inform_msg
+        where (userId = #{userId} and acceptId = #{acceptId})
+        or ((userId = #{acceptId} and acceptId = #{userId}))
+    </select>
+
+    <select id="selectSessionId" resultType="java.lang.Long">
+        select sessionId
+        from inform_msg
+        where (userId = #{userId} and acceptId = #{acceptId})
+        or ((userId = #{acceptId} and acceptId = #{userId})) LIMIT 1
+    </select>
+</mapper>
